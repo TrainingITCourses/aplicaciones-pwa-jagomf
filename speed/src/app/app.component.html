@@ -1,8 +1,25 @@
-<h1>Angular Speed: aplicaciones de alto rendimiento</h1>
+<div class="jumbotron">
+  <h1 class="display-4">Space + PWA</h1>
+  <div *ngIf="newVersion">
+    <p>There is a newer version!</p>
+    <button class="btn btn-success btn-lg" (click)="reqUpdate()">Refresh!</button>
+  </div>
+</div>
 
-<router-outlet></router-outlet>
-
-<footer>
-  <a href="https://trainingit.es/">Training IT</a>
-  <small>A course By <a href="https://twitter.com/albertobasalo">Alberto Basalo</a></small>
-</footer>
+<section class="container">
+  <div class="row selector-area">
+    <div class="col-12">
+      <app-select-criteria (changedCriteria)="setCriteria($event)"></app-select-criteria>
+      <div>Criterio seleccionado: {{criteria}}</div>
+    </div>
+  </div>
+  <hr/>
+  <div class="sel-value selector-area">
+    <app-select-value [options]="valuesHolder" (valueChosen)="setValue($event)"></app-select-value>
+    <div>Valor seleccionado: {{value?.name}}</div>
+  </div>
+  <hr/>
+  <div class="filtered-missions results-area">
+    <app-missions-viewer [sources]="missions" [criteria]="criteria" [value]="value"></app-missions-viewer>
+  </div>
+</section>
